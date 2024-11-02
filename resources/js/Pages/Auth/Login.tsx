@@ -4,9 +4,12 @@ import InputError from "@/components/InputError";
 import InputLabel from "@/components/InputLabel";
 import PrimaryButton from "@/components/PrimaryButton";
 import TextInput from "@/components/TextInput";
+import { Input } from "@/components/ui/input";
 import GuestLayout from "@/layouts/GuestLayout";
+import { LoginSchema } from "@/types/user";
 import { Head, Link, useForm } from "@inertiajs/react";
-import { FormEventHandler } from "react";
+import { Eye, EyeClosed } from "lucide-react";
+import { FormEventHandler, useState } from "react";
 
 export default function Login({
   status,
@@ -15,11 +18,14 @@ export default function Login({
   status?: string;
   canResetPassword: boolean;
 }) {
-  const { data, setData, post, processing, errors, reset } = useForm({
-    email: "",
-    password: "",
-    remember: false,
-  });
+  const { data, setData, post, processing, errors, reset } =
+    useForm<LoginSchema>({
+      email: "",
+      password: "",
+      remember: false,
+    });
+
+  const [showPassword, setShowPassword] = useState(false);
 
   const submit: FormEventHandler = (e) => {
     e.preventDefault();
@@ -39,14 +45,15 @@ export default function Login({
         <div>
           <InputLabel htmlFor="email" value="Email" />
 
-          <TextInput
+          <Input
+            variant="form_login"
             id="email"
             type="email"
             name="email"
             value={data.email}
             className="mt-1 block w-full"
             autoComplete="username"
-            isFocused={true}
+            autoFocus
             onChange={(e) => setData("email", e.target.value)}
           />
 
@@ -56,17 +63,31 @@ export default function Login({
         <div>
           <InputLabel htmlFor="password" value="Password" />
 
-          <TextInput
-            id="password"
-            type="password"
-            name="password"
-            value={data.password}
-            className="mt-1 block w-full"
-            autoComplete="current-password"
-            onChange={(e) => setData("password", e.target.value)}
-          />
+          <div className="relative">
+            <Input
+              variant="form_login"
+              id="password"
+              type={showPassword ? "text" : "password"}
+              name="password"
+              value={data.password}
+              className="mt-1 block w-full"
+              autoComplete="current-password"
+              onChange={(e) => setData("password", e.target.value)}
+            />
+            <InputError message={errors.password} className="mt-2" />
 
-          <InputError message={errors.password} className="mt-2" />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-2.5 top-3.5"
+            >
+              {showPassword ? (
+                <Eye className="size-4" />
+              ) : (
+                <EyeClosed className="size-4" />
+              )}
+            </button>
+          </div>
         </div>
 
         <div className="flex items-center justify-between">

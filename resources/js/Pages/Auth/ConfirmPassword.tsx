@@ -3,13 +3,15 @@ import InputLabel from "@/components/InputLabel";
 import PrimaryButton from "@/components/PrimaryButton";
 import TextInput from "@/components/TextInput";
 import GuestLayout from "@/layouts/GuestLayout";
+import { ConfirmPasswordSchema } from "@/types/user";
 import { Head, useForm } from "@inertiajs/react";
 import { FormEventHandler } from "react";
 
 export default function ConfirmPassword() {
-  const { data, setData, post, processing, errors, reset } = useForm({
-    password: "",
-  });
+  const { data, setData, post, processing, errors, reset } =
+    useForm<ConfirmPasswordSchema>({
+      password: "",
+    });
 
   const submit: FormEventHandler = (e) => {
     e.preventDefault();

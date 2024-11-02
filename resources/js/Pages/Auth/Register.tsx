@@ -2,17 +2,23 @@ import InputError from "@/components/InputError";
 import InputLabel from "@/components/InputLabel";
 import PrimaryButton from "@/components/PrimaryButton";
 import TextInput from "@/components/TextInput";
+import { Input } from "@/components/ui/input";
 import GuestLayout from "@/layouts/GuestLayout";
+import { RegisterUserSchema } from "@/types/user";
 import { Head, Link, useForm } from "@inertiajs/react";
-import { FormEventHandler } from "react";
+import { Eye, EyeClosed } from "lucide-react";
+import { FormEventHandler, useState } from "react";
 
 export default function Register() {
-  const { data, setData, post, processing, errors, reset } = useForm({
-    name: "",
-    email: "",
-    password: "",
-    password_confirmation: "",
-  });
+  const { data, setData, post, processing, errors, reset } =
+    useForm<RegisterUserSchema>({
+      name: "",
+      email: "",
+      password: "",
+      password_confirmation: "",
+    });
+
+  const [showPassword, setShowPassword] = useState(false);
 
   const submit: FormEventHandler = (e) => {
     e.preventDefault();
@@ -30,13 +36,14 @@ export default function Register() {
         <div>
           <InputLabel htmlFor="name" value="Name" />
 
-          <TextInput
+          <Input
+            variant="form_login"
             id="name"
             name="name"
             value={data.name}
             className="mt-1 block w-full"
             autoComplete="name"
-            isFocused={true}
+            autoFocus
             onChange={(e) => setData("name", e.target.value)}
           />
 
@@ -46,7 +53,8 @@ export default function Register() {
         <div>
           <InputLabel htmlFor="email" value="Email" />
 
-          <TextInput
+          <Input
+            variant="form_login"
             id="email"
             type="email"
             name="email"
@@ -62,17 +70,31 @@ export default function Register() {
         <div>
           <InputLabel htmlFor="password" value="Password" />
 
-          <TextInput
-            id="password"
-            type="password"
-            name="password"
-            value={data.password}
-            className="mt-1 block w-full"
-            autoComplete="new-password"
-            onChange={(e) => setData("password", e.target.value)}
-          />
+          <div className="relative">
+            <Input
+              variant="form_login"
+              id="password"
+              type={showPassword ? "text" : "password"}
+              name="password"
+              value={data.password}
+              className="mt-1 block w-full"
+              autoComplete="new-password"
+              onChange={(e) => setData("password", e.target.value)}
+            />
+            <InputError message={errors.password} className="mt-2" />
 
-          <InputError message={errors.password} className="mt-2" />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-2.5 top-3.5"
+            >
+              {showPassword ? (
+                <Eye className="size-4" />
+              ) : (
+                <EyeClosed className="size-4" />
+              )}
+            </button>
+          </div>
         </div>
 
         <div>
@@ -81,7 +103,8 @@ export default function Register() {
             value="Confirm Password"
           />
 
-          <TextInput
+          <Input
+            variant="form_login"
             id="password_confirmation"
             type="password"
             name="password_confirmation"

@@ -2,9 +2,12 @@ import InputError from "@/components/InputError";
 import InputLabel from "@/components/InputLabel";
 import PrimaryButton from "@/components/PrimaryButton";
 import TextInput from "@/components/TextInput";
+import { Input } from "@/components/ui/input";
 import GuestLayout from "@/layouts/GuestLayout";
+import { ResetPasswordSchema } from "@/types/user";
 import { Head, useForm } from "@inertiajs/react";
-import { FormEventHandler } from "react";
+import { Eye, EyeClosed } from "lucide-react";
+import { FormEventHandler, useState } from "react";
 
 export default function ResetPassword({
   token,
@@ -13,12 +16,15 @@ export default function ResetPassword({
   token: string;
   email: string;
 }) {
-  const { data, setData, post, processing, errors, reset } = useForm({
-    token: token,
-    email: email,
-    password: "",
-    password_confirmation: "",
-  });
+  const { data, setData, post, processing, errors, reset } =
+    useForm<ResetPasswordSchema>({
+      token: token,
+      email: email,
+      password: "",
+      password_confirmation: "",
+    });
+
+  const [showPassword, setShowPassword] = useState(false);
 
   const submit: FormEventHandler = (e) => {
     e.preventDefault();
@@ -49,21 +55,30 @@ export default function ResetPassword({
           <InputError message={errors.email} className="mt-2" />
         </div>
 
-        <div>
-          <InputLabel htmlFor="password" value="Password" />
-
-          <TextInput
+        <div className="relative">
+          <Input
+            variant="form_login"
             id="password"
-            type="password"
+            type={showPassword ? "text" : "password"}
             name="password"
             value={data.password}
             className="mt-1 block w-full"
-            autoComplete="new-password"
-            isFocused={true}
+            autoComplete="current-password"
             onChange={(e) => setData("password", e.target.value)}
           />
-
           <InputError message={errors.password} className="mt-2" />
+
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-2.5 top-3.5"
+          >
+            {showPassword ? (
+              <Eye className="size-4" />
+            ) : (
+              <EyeClosed className="size-4" />
+            )}
+          </button>
         </div>
 
         <div>

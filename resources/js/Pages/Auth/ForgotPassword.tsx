@@ -3,13 +3,15 @@ import InputError from "@/components/InputError";
 import PrimaryButton from "@/components/PrimaryButton";
 import TextInput from "@/components/TextInput";
 import GuestLayout from "@/layouts/GuestLayout";
+import { ForgotPasswordSchema } from "@/types/user";
 import { Head, useForm } from "@inertiajs/react";
 import { FormEventHandler } from "react";
 
 export default function ForgotPassword({ status }: { status?: string }) {
-  const { data, setData, post, processing, errors } = useForm({
-    email: "",
-  });
+  const { data, setData, post, processing, errors } =
+    useForm<ForgotPasswordSchema>({
+      email: "",
+    });
 
   const submit: FormEventHandler = (e) => {
     e.preventDefault();
