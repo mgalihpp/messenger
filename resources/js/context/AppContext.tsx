@@ -1,240 +1,83 @@
-// import { fetchNotification } from "@/api/chats";
-// import Alert from "@/components/Alert";
-import { PageProps } from "@/types";
-// import { User } from "@/types/user";
-// import { replaceBadgeNotificationCount } from "@/utils";
+import { AppReducer } from "@/reducer/AppReducer";
+import { User } from "@/types/user";
 import { usePage } from "@inertiajs/react";
-// import moment from "moment";
 import {
   createContext,
   useContext,
-  PropsWithChildren,
-  useReducer,
   useEffect,
+  useReducer,
   useState,
-  useRef,
 } from "react";
 
-type State = {
-  theme: string;
-  //   auth: User;
-  errorMsg?: string | null;
-  successMsg?: string | null;
-  notificationCount: number;
+export type AppState = {
+  theme: "dark" | "light" | "system" | string;
+  auth: User;
   setTheme: (value: string) => void;
-  //   setAuth: (value: User) => void;
-  setErrorMsg: (value: string | null) => void;
-  setSuccessMsg: (value: string | null) => void;
-  syncNotification: () => void;
+  setAuth: (value: User) => void;
 };
 
-type Action =
-  | {
-      type: "SET_THEME";
-      payload: string;
-    }
-  //   | {
-  //       type: "SET_AUTH";
-  //       payload: User;
-  //     }
-  | {
-      type: "SET_ERROR_MSG";
-      payload: string | null;
-    }
-  | {
-      type: "SET_SUCCESS_MSG";
-      payload: string | null;
-    }
-  | {
-      type: "SET_NOTIFICATION_COUNT";
-      payload: number;
-    };
-
-const initialState: State = {
+const AppInitialState: AppState = {
   theme: localStorage.getItem("theme") || "system",
-  //   auth: {
-  //     id: "",
-  //     name: "",
-  //     email: "",
-  //     email_verified_at: "",
-  //     avatar: "",
-  //     active_status: false,
-  //     is_online: false,
-  //     last_seen: "",
-  //     is_contact_blocked: false,
-  //     is_contact_saved: false,
-  //   },
-  notificationCount: 0,
+  auth: {
+    id: "",
+    name: "",
+    email: "",
+    email_verified_at: "",
+    avatar: "",
+    active_status: false,
+    is_online: false,
+    last_seen: "",
+    created_at: "",
+    updated_at: "",
+    is_contact_blocked: false,
+    is_contact_saved: false,
+  },
   setTheme: () => {},
-  //   setAuth: () => {},
-  setErrorMsg: () => {},
-  setSuccessMsg: () => {},
-  syncNotification: () => {},
+  setAuth: () => {},
 };
 
-const reducer = (state: State, action: Action) => {
-  switch (action.type) {
-    case "SET_THEME":
-      const theme = action.payload;
-      const html = document.documentElement;
-
-      if (html) {
-        html.classList.remove("dark");
-        html.classList.remove("light");
-      }
-
-      switch (theme) {
-        case "system":
-          window.matchMedia("(prefers-color-scheme: dark)").matches
-            ? html.classList.add("dark")
-            : html.classList.add("light");
-          break;
-        case "dark":
-          html.classList.add("dark");
-          break;
-        case "light":
-          html.classList.add("light");
-      }
-
-      localStorage.setItem("theme", theme);
-
-      return {
-        ...state,
-        theme,
-      };
-
-    // case "SET_AUTH":
-    //   return {
-    //     ...state,
-    //     auth: action.payload,
-    //   };
-
-    case "SET_ERROR_MSG":
-      return {
-        ...state,
-        errorMsg: action.payload,
-      };
-
-    case "SET_SUCCESS_MSG":
-      return {
-        ...state,
-        successMsg: action.payload,
-      };
-
-    case "SET_NOTIFICATION_COUNT":
-      return {
-        ...state,
-        notificationCount: action.payload,
-      };
-  }
-};
-
-const AppContext = createContext(initialState);
+const AppContext = createContext<AppState>(AppInitialState);
 
 export const useAppContext = () => {
   const context = useContext(AppContext);
 
   if (!context) {
-    throw new Error("useAppContext must be used within an AppProvider");
+    throw new Error("useAppContext must be used within AppContext");
   }
 
   return context;
 };
 
-export const AppProvider = ({ children }: PropsWithChildren) => {
-  const props = usePage<PageProps>().props;
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const [isFirstLoading, setIsFirstLoading] = useState(true);
+export const AppProvider = ({ children }: { children: React.ReactNode }) => {
+  const props = usePage().props;
 
-  const notificationRef = useRef<HTMLAudioElement>(null);
+  const [state, dispacth] = useReducer(AppReducer, AppInitialState);
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
 
-  const setTheme = (value: string) =>
-    dispatch({ type: "SET_THEME", payload: value });
+  const setTheme = (theme: string) =>
+    dispacth({
+      type: "SET_THEME",
+      payload: theme,
+    });
 
-  //   const setAuth = (value: User) =>
-  //     dispatch({ type: "SET_AUTH", payload: value });
-
-  const setErrorMsg = (value: string | null) =>
-    dispatch({ type: "SET_ERROR_MSG", payload: value });
-
-  const setSuccessMsg = (value: string | null) =>
-    dispatch({ type: "SET_SUCCESS_MSG", payload: value });
-
-  const setNotificationCount = (value: number) =>
-    dispatch({ type: "SET_NOTIFICATION_COUNT", payload: value });
-
-  //   const syncNotification = async () => {
-  //     const lastSync = localStorage.getItem("last-sync-notification");
-  //     const currentTime = moment();
-
-  //     if (lastSync && currentTime.diff(moment(parseInt(lastSync))) < 3000) return;
-
-  //     localStorage.setItem(
-  //       "last-sync-notification",
-  //       currentTime.valueOf().toString(),
-  //     );
-
-  //     return await fetchNotification().then((response) => {
-  //       setNotificationCount(response.data.data.notification_count);
-  //     });
-  //   };
-
-  //   useEffect(() => {
-  // setAuth(props.auth);
-  // setNotificationCount(props.notification_count);
-  // setIsFirstLoading(false);
-
-  // if (props.error_msg) setErrorMsg(props.error_msg);
-  // if (props.success_msg) setSuccessMsg(props.success_msg);
-
-  // window.Echo.channel(`send-message-${props.auth.id}`).listen(
-  //   ".send-message",
-  //   () => {
-  //     syncNotification().then(() => {
-  //       notificationRef.current?.play();
-  //     });
-  //   },
-  // );
-  //   }, []);
+  const setAuth = (user: User) =>
+    dispacth({
+      type: "SET_AUTH",
+      payload: user,
+    });
 
   useEffect(() => {
-    if (state.errorMsg) setTimeout(() => setErrorMsg(null), 5000);
-    if (state.successMsg) setTimeout(() => setSuccessMsg(null), 5000);
-  }, [state.errorMsg, state.successMsg]);
+    setAuth(props.auth.user);
+    setIsFirstLoad(false);
+  }, []);
 
-  //   useEffect(() => {
-  //     !isFirstLoading && replaceBadgeNotificationCount(state.notificationCount);
-  //   }, [state.notificationCount]);
-
-  const value = {
+  const values = {
     ...state,
     theme: localStorage.getItem("theme") || "system",
-    // auth: isFirstLoading ? props.auth : state.auth,
-    notificationCount: isFirstLoading
-      ? props.notification_count
-      : state.notificationCount,
+    auth: isFirstLoad ? props.auth.user : state.auth,
     setTheme,
-    // setAuth,
-    setErrorMsg,
-    setSuccessMsg,
-    // syncNotification,
+    setAuth,
   };
 
-  return (
-    <AppContext.Provider value={value}>
-      {children}
-
-      {/* {state.errorMsg && (
-        <Alert message={state.errorMsg} className="bg-danger text-white" />
-      )}
-      {state.successMsg && (
-        <Alert message={state.successMsg} className="bg-success text-white" />
-      )} */}
-
-      <audio controls className="hidden" ref={notificationRef}>
-        <source src="/audios/notification.mp3" type="audio/mpeg" />
-        Your browser does not support the audio element.
-      </audio>
-    </AppContext.Provider>
-  );
+  return <AppContext.Provider value={values}>{children}</AppContext.Provider>;
 };

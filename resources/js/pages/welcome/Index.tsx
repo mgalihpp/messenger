@@ -1,4 +1,3 @@
-import ApplicationLogo from "@/components/ApplicationLogo";
 import InputError from "@/components/InputError";
 import PrimaryButton from "@/components/PrimaryButton";
 import { LoginSchema } from "@/types/user";
@@ -6,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Link, useForm } from "@inertiajs/react";
 import { Eye, EyeClosed } from "lucide-react";
 import { useState, FormEventHandler } from "react";
+import Navbar from "./partials/Navbar";
 
 export default function Welcome({
   canResetPassword,
@@ -33,15 +33,11 @@ export default function Welcome({
 
   return (
     <section className="mx-auto flex min-h-screen max-w-7xl flex-col gap-12 p-8 font-['Inter'] text-foreground">
-      <div>
-        <Link href="/">
-          <ApplicationLogo className="h-10" />
-        </Link>
-      </div>
+      <Navbar />
 
       <div className="grid grid-cols-1 sm:grid-cols-2">
         <div className="space-y-6 sm:w-11/12 sm:space-y-12">
-          <h1 className="text-4xl font-bold sm:text-5xl lg:text-7xl">
+          <h1 className="text-5xl font-bold sm:text-6xl lg:text-7xl">
             <span className="bg-gradient-to-r from-blue-600 via-purple-500 to-rose-500 bg-clip-text text-transparent">
               Hang out
             </span>
@@ -128,7 +124,7 @@ export default function Welcome({
           </form>
         </div>
 
-        <div className="hidden items-center justify-center sm:flex">
+        <div className="mt-12 items-center justify-center sm:flex">
           <img src="/images/vector.png" alt="vector" />
         </div>
       </div>

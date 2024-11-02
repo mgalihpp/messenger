@@ -3,7 +3,6 @@ import FormAlertStatus from "@/components/FormAlertStatus";
 import InputError from "@/components/InputError";
 import InputLabel from "@/components/InputLabel";
 import PrimaryButton from "@/components/PrimaryButton";
-import TextInput from "@/components/TextInput";
 import { Input } from "@/components/ui/input";
 import GuestLayout from "@/layouts/GuestLayout";
 import { LoginSchema } from "@/types/user";

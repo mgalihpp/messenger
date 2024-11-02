@@ -49,7 +49,9 @@ export default function UpdateProfileInformation({
       setData("avatar", files[0]);
 
       const imageUrl = window.URL.createObjectURL(files[0]);
-      avatarRef.current?.setAttribute("src", imageUrl);
+      if (avatarRef.current) {
+        avatarRef.current.setAttribute("src", imageUrl);
+      }
 
       return () => {
         window.URL.revokeObjectURL(imageUrl);
