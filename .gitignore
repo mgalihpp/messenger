@@ -21,3 +21,8 @@ yarn-error.log
 /.idea
 /.vscode
 /.zed
+
+# NO NEED TO PUSH 
+_ide_helper.php
+_ide_helper_models.php
+/config/ide-helper.php

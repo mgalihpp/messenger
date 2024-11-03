@@ -1,3 +1,5 @@
+import { Chat } from "./chat";
+
 export type Paginate<T> = {
   data: T;
   current_page: number;
@@ -20,7 +22,7 @@ export interface Link {
   active: boolean;
 }
 
-export const InitialPaginate: Paginate<unknown> = {
+export const InitialPaginate: Paginate<Chat[]> = {
   data: [],
   current_page: 0,
   first_page_url: "",

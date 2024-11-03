@@ -1,6 +1,6 @@
 import Modal from "@/components/Modal";
 import Preferences from "@/components/modals/Preferences";
-import { ModalAction, ModalReducer } from "@/reducer/ModalReducer";
+import { ModalAction, ModalReducer } from "@/reducers/ModalReducer";
 import { createContext, useContext, useReducer } from "react";
 
 export type ModalViews = "PREFERENCES";

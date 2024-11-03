@@ -1,4 +1,4 @@
-import { ChatReducer } from "@/reducer/ChatReducer";
+import { ChatReducer } from "@/reducers/ChatReducer";
 import { ChatPageProps } from "@/types";
 import { Chat, ChatPaginate } from "@/types/chat";
 import { InitialPaginate } from "@/types/paginate";

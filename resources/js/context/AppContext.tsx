@@ -1,4 +1,4 @@
-import { AppReducer } from "@/reducer/AppReducer";
+import { AppReducer } from "@/reducers/AppReducer";
 import { User } from "@/types/user";
 import { usePage } from "@inertiajs/react";
 import {
