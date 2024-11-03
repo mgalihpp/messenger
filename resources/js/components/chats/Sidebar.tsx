@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import ChatListSearch from "@/components/chats/ChatListSearch";
 import ChatList from "@/components/chats/ChatList";
-import { useChatContext } from "@/context/ChatContext";
+import { useChatContext } from "@/contexts/ChatContext";
 
 export default function Sidebar() {
   const { chats } = useChatContext();

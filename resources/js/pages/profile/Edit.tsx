@@ -4,7 +4,7 @@ import { Head } from "@inertiajs/react";
 import DeleteUserForm from "./partials/DeleteUserForm";
 import UpdatePasswordForm from "./partials/UpdatePasswordForm";
 import UpdateProfileInformationForm from "./partials/UpdateProfileInformationForm";
-import { AppProvider } from "@/context/AppContext";
+import { AppProvider } from "@/contexts/AppContext";
 
 export default function Edit({
   mustVerifyEmail,

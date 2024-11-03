@@ -1,4 +1,4 @@
-import { ModalState, OpenModal } from "@/context/ModalContext";
+import { ModalState, OpenModal } from "@/contexts/ModalContext";
 
 export type ModalAction<T = unknown> =
   | ({

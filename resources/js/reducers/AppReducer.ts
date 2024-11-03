@@ -1,5 +1,5 @@
 /* eslint-disable no-case-declarations */
-import { AppState } from "@/context/AppContext";
+import { AppState } from "@/contexts/AppContext";
 import { User } from "@/types/user";
 
 export type AppAction =

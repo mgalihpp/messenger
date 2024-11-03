@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { BiSearch } from "react-icons/bi";
-import { useChatContext } from "@/context/ChatContext";
+import { useChatContext } from "@/contexts/ChatContext";
 import { fetchChats } from "@/api/chat";
 import useDebounce from "@/hooks/useDebounce";
 import useMounted from "@/hooks/useMounted";

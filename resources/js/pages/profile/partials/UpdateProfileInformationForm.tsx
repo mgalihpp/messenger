@@ -9,7 +9,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { useAppContext } from "@/context/AppContext";
+import { useAppContext } from "@/contexts/AppContext";
 import { UpdateProfileSchema } from "@/types/user";
 import { Transition } from "@headlessui/react";
 import { Link, useForm } from "@inertiajs/react";

@@ -3,7 +3,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Chat } from "@/types/chat";
 import BadgeOnline from "@/components/chats/badge/BadgeOnline";
 import { cn, relativeTime } from "@/lib/utils";
-import { useChatContext } from "@/context/ChatContext";
+import { useChatContext } from "@/contexts/ChatContext";
 import BadgeChatNotification from "@/components/chats/badge/BadgeChatNotification";
 
 interface ChatListProps {

@@ -1,5 +1,5 @@
-import { useAppContext } from "@/context/AppContext";
-import { useModalContext } from "@/context/ModalContext";
+import { useAppContext } from "@/contexts/AppContext";
+import { useModalContext } from "@/contexts/ModalContext";
 import Modal from "@/components/modals/Modal";
 import { Fragment } from "react";
 import { BsAppIndicator, BsChevronDown, BsCircleHalf } from "react-icons/bs";

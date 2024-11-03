@@ -1,8 +1,8 @@
 import BadgeNotification from "@/components/chats/badge/BadgeNotification";
 import Dropdown from "@/components/Dropdown";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { useAppContext } from "@/context/AppContext";
-import { useModalContext } from "@/context/ModalContext";
+import { useAppContext } from "@/contexts/AppContext";
+import { useModalContext } from "@/contexts/ModalContext";
 import { cn } from "@/lib/utils";
 import { Link } from "@inertiajs/react";
 import {

@@ -1,4 +1,4 @@
-import { ChatState } from "@/context/ChatContext";
+import { ChatState } from "@/contexts/ChatContext";
 import { Chat, ChatPaginate } from "@/types/chat";
 
 export type ChatAction =

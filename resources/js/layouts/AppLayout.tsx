@@ -1,4 +1,4 @@
-import { AppProvider } from "@/context/AppContext";
+import { AppProvider } from "@/contexts/AppContext";
 import { Head } from "@inertiajs/react";
 import { PropsWithChildren } from "react";
 
