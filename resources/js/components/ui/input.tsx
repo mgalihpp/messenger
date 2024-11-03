@@ -11,6 +11,8 @@ const inputVariants = cva(
         default:
           "flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
         form_login: "form-control",
+        search_input:
+          "w-full border-secondary bg-background pl-10 focus:border-secondary focus-withing:ring-4 focus-within:ring-muted transition-all outline-none",
       },
     },
     defaultVariants: {

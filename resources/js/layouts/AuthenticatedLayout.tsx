@@ -1,20 +1,13 @@
 import ApplicationLogo from "@/components/ApplicationLogo";
-import Dropdown from "@/components/Dropdown";
 import NavLink from "@/components/NavLink";
-import ResponsiveNavLink from "@/components/ResponsiveNavLink";
-import { Link, usePage } from "@inertiajs/react";
-import { PropsWithChildren, ReactNode, useState } from "react";
+import { Link } from "@inertiajs/react";
+import { PropsWithChildren, ReactNode } from "react";
 import { BsBoxArrowRight } from "react-icons/bs";
 
 export default function Authenticated({
   header,
   children,
 }: PropsWithChildren<{ header?: ReactNode }>) {
-  const user = usePage().props.auth.user;
-
-  const [showingNavigationDropdown, setShowingNavigationDropdown] =
-    useState(false);
-
   return (
     <div className="min-h-screen bg-secondary">
       <nav className="border-b border-secondary bg-background">

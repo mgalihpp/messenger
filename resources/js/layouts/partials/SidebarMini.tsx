@@ -1,4 +1,4 @@
-import BadgeNotification from "@/components/chats/BadgeNotification";
+import BadgeNotification from "@/components/chats/badge/BadgeNotification";
 import Dropdown from "@/components/Dropdown";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { useAppContext } from "@/context/AppContext";
@@ -26,7 +26,7 @@ export default function SidebarMini() {
   };
 
   return (
-    <div className="order-2 mt-auto flex flex-row justify-between gap-1 bg-background sm:order-1 sm:mt-0 sm:flex-col sm:items-center sm:justify-center sm:p-2">
+    <div className="order-2 mt-auto flex flex-row justify-between gap-1 border-t-2 border-secondary bg-background sm:order-1 sm:mt-0 sm:flex-col sm:items-center sm:justify-center sm:border-none sm:p-2">
       <Link
         href={route("chats.index")}
         className={cn(

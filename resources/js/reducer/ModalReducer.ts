@@ -1,6 +1,6 @@
 import { ModalState, OpenModal } from "@/context/ModalContext";
 
-export type ModalAction<T = any> =
+export type ModalAction<T = unknown> =
   | ({
       type: "OPEN";
     } & OpenModal<T>)

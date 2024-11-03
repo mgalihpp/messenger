@@ -5,13 +5,13 @@ import { createContext, useContext, useReducer } from "react";
 
 export type ModalViews = "PREFERENCES";
 export type ModalSize = "sm" | "md" | "lg" | "xl" | "2xl";
-export type OpenModal<T = any> = {
+export type OpenModal<T = unknown> = {
   view?: ModalViews;
   size?: ModalSize;
   payload?: T;
 };
 
-export type ModalState<T = any> = {
+export type ModalState<T = unknown> = {
   view?: ModalViews;
   size?: ModalSize;
   data?: T;
@@ -72,7 +72,7 @@ export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
 };
 
 export const ModalChildren = () => {
-  const { isOpen, openModal, closeModal, size, view } = useModalContext();
+  const { isOpen, closeModal, size, view } = useModalContext();
 
   return (
     <Modal show={isOpen} onClose={closeModal} maxWidth={size}>

@@ -9,9 +9,10 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useAppContext } from "@/context/AppContext";
 import { UpdateProfileSchema } from "@/types/user";
 import { Transition } from "@headlessui/react";
-import { Link, useForm, usePage } from "@inertiajs/react";
+import { Link, useForm } from "@inertiajs/react";
 import { Camera } from "lucide-react";
 import { ChangeEvent, FormEventHandler, useRef } from "react";
 
@@ -24,7 +25,7 @@ export default function UpdateProfileInformation({
   status?: string;
   className?: string;
 }) {
-  const user = usePage().props.auth.user;
+  const user = useAppContext().auth;
 
   const avatarRef = useRef<HTMLImageElement>(null);
 

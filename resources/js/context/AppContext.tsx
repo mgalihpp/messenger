@@ -41,6 +41,8 @@ const AppContext = createContext<AppState>(AppInitialState);
 export const useAppContext = () => {
   const context = useContext(AppContext);
 
+  console.log(context);
+
   if (!context) {
     throw new Error("useAppContext must be used within AppContext");
   }
